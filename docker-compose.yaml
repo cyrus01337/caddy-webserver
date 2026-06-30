@@ -1,0 +1,22 @@
+name: caddy-webserver
+
+services:
+  webserver:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - webserver-configuration:/config
+      - webserver-data:/data
+
+volumes:
+  webserver-configuration:
+  webserver-data:
